@@ -15,8 +15,6 @@ Plataforma mobile de descrição de arquivos criado para o HackathAN - Desafio d
 ## Documentação 📄
 
 - [Figma](https://www.figma.com/file/pvuopnxZXQt3Vv0c2YIX7l/HakathAN?type=design&node-id=0-1&mode=design&t=jQ0XrwIyiYC9MlLS-0)
-- [Resumo executivo](https://docs.google.com/document/d/1eqA4kHZGe9GQflE8e7QieB1R8lJileaO4gh1jeIt0sk/edit#heading=h.z6ne0og04bp5)
-- [Notion](https://www.notion.so/recria/1ff1db6308b74078b579be213dbccfa8?v=2ad3ab1c1b0c4656a1953fdcd8637c20)
 
   
 
