@@ -27,7 +27,7 @@ export default function TabLayout() {
         headerShown: useClientOnlyValue(false, true),
       }}>
       <Tabs.Screen
-        name="index"
+        name="feed"
         options={{
           title: 'Feed',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
@@ -48,7 +48,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="score"
         options={{
           title: 'Descrições',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
