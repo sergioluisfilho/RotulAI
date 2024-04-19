@@ -1,8 +1,23 @@
 import { Router } from "express";
 import pool from "./db.js";
 import { authorize } from "./middlewares/authorize.js";
-
+import { generateToken } from "./generateToken.js";
 const routes = Router();
+
+routes.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const { rows } = await pool.query(
+      "SELECT id FROM public.users where email = $1 and password = $2",
+      [email, password]
+    );
+    const token = `JWT ${generateToken(rows[0])}`;
+    res.send(token);
+  } catch (error) {
+    console.log(error);
+    res.status(404);
+  }
+});
 
 routes.get("/documents", async (req, res) => {
   try {
@@ -41,6 +56,9 @@ routes.post(
         [title, date, content, indexes, user_id, document_id]
       );
       console.log(insert);
+
+      // muda o status para 1
+
       return res.status(201).json({ id: insert.rows[0].id });
     } catch (error) {
       console.log(error);
@@ -51,7 +69,38 @@ routes.post(
 
 routes.post(
   "/documents/:document_id/description/:description_id/review",
+  authorize,
   async (req, res) => {
+    const { document_id, description_id } = req.params;
+    const { vote } = req.body;
+
+    if (vote === 1) {
+      // Caso aprove:
+      try {
+        // Muda status do document para 2 (catalogado)
+        const documents = await pool.query(
+          "UPDATE public.documents set status = $1 where id = $2 returning reward_points",
+          [2, document_id]
+        );
+        const { reward_points } = documents.rows[0];
+
+        const { user_id } = req.user;
+
+        const users = await pool.query(
+          // Incrementa a pontuacao do user com os pontos do document
+          "UPDATE public.users set points = points + $1 where id = $2 returning points",
+          [reward_points, user_id]
+        );
+        res.json({ user_points: users.rows[0].points });
+      } catch (error) {
+        console.log(error);
+        res.status(404);
+      }
+    } else if (vote === 0) {
+      // Caso negue:
+      // Muda o status para 0
+      // Deleta a avaliacao
+    }
     res.send();
   }
 );
