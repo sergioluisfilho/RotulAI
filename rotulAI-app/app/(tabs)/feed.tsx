@@ -16,6 +16,11 @@ import {
 import { useRouter } from 'expo-router';
 import SubmitButton from '@/components/SubmitButton';
 import Header from '@/components/Header';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import PagerView from 'react-native-pager-view';
+import MyCarousel from '@/components/Carousel';
+
+
 
 export default function HomeScreen(): JSX.Element {
     const router = useRouter();
@@ -30,20 +35,122 @@ export default function HomeScreen(): JSX.Element {
     if (!fontsLoaded) {
         return <View />;
     }
+
+    const carouselItems = [
+      {
+          title: 'Item 1',
+          image: require('../../assets/images/icono.svg'),
+      },
+      {
+          title: 'Item 2',
+          image: require('../../assets/images/Logo.svg'),
+      },
+      {
+          title: 'Item 3',
+          image: require('../../assets/images/fono.svg'),
+      },
+  ];
+
+
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <View style={{
+            <SafeAreaView style={{
                 display: 'flex',
-                backgroundColor: '#fff',
+                backgroundColor: '#212B4E',
                 height: '100%',
             }}>
               <Header 
                 pageName="HOMEPAGE"
-                name="AAAAAAAAAAAA" 
+                name="Leonardo" 
                 pic="https://www.w3schools.com/howto/img_avatar.png"
               />
+                <TextInput 
+                  style={styles.input} 
+                  placeholder='Buscar serviço ou informção'
+                  placeholderTextColor='rgba(94, 94, 94, 0.60)'
+                  >
+                </TextInput>
+                <View style={{backgroundColor: '#fff', width: 332, height: 151, alignSelf: 'center', marginTop: 24, borderRadius: 20,
+}}>
+                  <MyCarousel/>  
+                </View>                
+                <View style={styles.bottomView}>
+                  <Text style={{
+                    color: '#081448',
+                    fontFamily: 'Poppins_700Bold',
+                    fontSize: 20,
+                    marginTop: 26,
+                  }}>
+                    Categorias
+                  </Text>
+                  <View style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    marginTop: 20,
+                    backgroundColor: '#FCFCFC',
+                    flexWrap: 'wrap',
+                    height: 200,
+                    width: 400,
+                    
+                  }}>
+                    <TouchableOpacity style={{
+                      width: 141, 
+                      height: 166,
+                      borderRadius: 10,
+                      alignItems: 'center',
+                      backgroundColor: '#fff',
+                      shadowColor: '#000',
+                      shadowOffset: {
+                          width: 0,
+                          height: 4,
+                      },
+                      shadowOpacity: 0.25,
+                      marginRight: 12,
+                                     
+                    }}>
+                      <Image source={require('../../assets/images/Textual.svg')} style={{width: 84, height: 84, marginTop: 24}}/>
+                      <Text style={styles.categoryText}>
+                        Textual
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.smallCategory}>
+                      <Image source={require('../../assets/images/mapa.svg')} style={{width: 36, height: 36, marginTop: 11}}/>
+                      <Text style={styles.categoryTextSmall}>
+                        Cartográficos
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.smallCategory}>
+                      <Image source={require('../../assets/images/icono.svg')} style={{width: 36, height: 36, marginTop: 11}}/>
+                      <Text style={styles.categoryTextSmall}>
+                        Iconográficos
+                      </Text>
+                    </TouchableOpacity>
+                    <View style={{
+                      position: 'absolute',
+                      flexDirection: 'row',
+                      marginLeft: 139,
+                      marginTop: 85,
+                      marginBottom: 40,
+                      backgroundColor: 'transparent',
+                    }}>
+                      <TouchableOpacity style={styles.smallCategoryBottom}>
+                        <Image source={require('../../assets/images/fono.svg')} style={{width: 36, height: 36, marginTop: 11}}/>
+                        <Text style={styles.categoryTextSmall}>
+                          Sonoro
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity style={styles.smallCategoryBottom}>
+                        <Image source={require('../../assets/images/audiovisual.svg')} style={{width: 36, height: 36, marginTop: 11}}/>
+                        <Text style={styles.categoryTextSmall}>
+                          Audiovisuais
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
 
-            </View>
+                  </View>
+                </View>
+              </SafeAreaView>
+                
         </TouchableWithoutFeedback>
     );
 }
@@ -71,11 +178,6 @@ const styles = StyleSheet.create({
         marginBottom: 45,
 
     },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
-    },
     image: {
         alignSelf: 'center',
         marginTop: 100,
@@ -83,60 +185,77 @@ const styles = StyleSheet.create({
         width: 132,
         height: 32
     },
-    registerText: {
-        color: '#081448',
-        textAlign: 'center',
-        fontFamily: 'Poppins_500Medium',
-        letterSpacing: 0.78,
-        fontSize: 13,
-    },
-    govButton: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        width: 173,
-        height: 40,
-        marginTop: 18,
-        textAlign: 'center',
-        alignSelf: 'center',
-        borderWidth: 2,
-        borderRadius: 10,
-        borderColor: '#253673',
-
-    },
-    govText: {
-        color: '#253673',
-        fontSize: 15,
-        letterSpacing: 1,
-        marginRight: 2,
-        
-    },
-    govImg: {
-        width: 56,
-        height: 20,
-    },
     input : {
         backgroundColor: '#fff',
-        borderRadius: 600,
-        width: 296,
-        height: 38,
+        borderRadius: 60,
+        width: 339,
+        height: 43,
         paddingLeft: 20,
         paddingRight: 20,
         marginBottom: 9,
+        alignSelf: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.8,
+        shadowRadius: 3.84,
+
     },
-    label : {
-        color: '#fff',
-        fontSize: 13,
-        fontFamily: 'Poppins_400Regular',
-        marginBottom: 5,
-        marginLeft: 5,
+    bottomView: {
+        display: 'flex',
+        backgroundColor: '#FCFCFC',
+        height: '45%',
+        borderTopLeftRadius: 60,
+        borderTopRightRadius: 60,
+        flexDirection: 'column',
+        paddingRight: 36,
+        paddingLeft: 36,
+        top: 20,
+        
     },
-    forgotPassword: {
-        color: '#fff',
+    categoryText: {
+        color: '#5E5E5E',
+        fontFamily: 'Poppins_600SemiBold',
+        fontSize: 20,
+        marginTop: 4,
+    },
+    categoryTextSmall: {
+        color: '#5E5E5E',
+        fontFamily: 'Poppins_600SemiBold',
         fontSize: 10,
-        fontFamily: 'Poppins_500Medium',
-        marginLeft: 200,
-    }
+        marginTop: 4,
+        marginBottom: 10,
+    },
+    smallCategory: {
+      width: 78, 
+      height: 80,
+      marginRight: 11,
+      borderRadius: 10,
+      alignItems: 'center',
+      backgroundColor: '#fff',
+      shadowColor: '#000',
+      shadowOffset: {
+          width: 0,
+          height: 4,
+      },
+      shadowOpacity: 0.25,
+    },
+    smallCategoryBottom: {
+      width: 78, 
+      height: 80,
+      borderRadius: 10,
+      alignItems: 'center',
+      backgroundColor: '#fff',
+      shadowColor: '#000',
+      shadowOffset: {
+          width: 0,
+          height: 4,
+      },
+      shadowOpacity: 0.25,
+      marginLeft: 11,
+    },
+
+
 });
