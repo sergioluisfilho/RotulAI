@@ -1,18 +1,53 @@
 import { Router } from "express";
+import pool from "./db.js";
+import { authorize } from "./middlewares/authorize.js";
 
 const routes = Router();
 
 routes.get("/documents", async (req, res) => {
-  res.send();
+  try {
+    const { rows } = await pool.query("SELECT * FROM public.documents", []);
+    res.json({ documents: rows });
+  } catch (error) {
+    console.log(error);
+    res.status(404);
+  }
 });
 
-routes.get("/documents/:id", async (req, res) => {
-  res.send();
-});
+// routes.get("/documents/:id", async (req, res) => {
+//   const { user_id } = req.user;
+//   const { document_id } = req.params;
+//   res.json({ user_id, document_id });
+// });
 
-routes.post("/documents/:id/description", async (req, res) => {
-  res.send();
-});
+routes.post(
+  "/documents/:document_id/description",
+  authorize,
+  async (req, res) => {
+    try {
+      const { title, date, content, indexes } = req.body;
+      const { user_id } = req.user;
+      const document_id = parseInt(req.params.document_id);
+      console.table({
+        title,
+        date,
+        content,
+        indexes,
+        user_id,
+        document_id,
+      });
+      const insert = await pool.query(
+        "INSERT INTO public.descriptions (title, date, content, indexes, user_id, document_id) VALUES ($1, $2, $3, $4, $5, $6) returning id",
+        [title, date, content, indexes, user_id, document_id]
+      );
+      console.log(insert);
+      return res.status(201).json({ id: insert.rows[0].id });
+    } catch (error) {
+      console.log(error);
+      return res.status(404);
+    }
+  }
+);
 
 routes.post(
   "/documents/:document_id/description/:description_id/review",
