@@ -45,6 +45,7 @@ export default function TabLayout() {
         name="feed"
         options={{
           tabBarLabel: 'Home',
+          headerShown: false,
           tabBarIcon: ({ color }) => <Iconify icon="bx:home-alt-2" color={color} size={29} />,
           headerRight: () => (
             <Link href="/modal" asChild>
