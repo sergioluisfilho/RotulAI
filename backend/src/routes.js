@@ -96,10 +96,20 @@ routes.post(
         console.log(error);
         res.status(404);
       }
-    } else if (vote === 0) {
+    }
+    // nao testei
+    else if (vote === 0) {
       // Caso negue:
       // Muda o status para 0
-      // Deleta a avaliacao
+      const documents = await pool.query(
+        "UPDATE public.documents set status = $1 where id = $2 returning reward_points",
+        [0, document_id]
+      );
+      // Deleta a descricao
+      const descriptions = await pool.query(
+        "DELETE FROM public.descriptions where id = $1",
+        [description_id]
+      );
     }
     res.send();
   }
