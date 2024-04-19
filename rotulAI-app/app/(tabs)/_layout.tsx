@@ -1,36 +1,51 @@
-import React from 'react';
+import React, {useState} from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
-
+import { Pressable, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Iconify } from 'react-native-iconify';
+import { Poppins_500Medium } from '@expo-google-fonts/poppins';
+import { useFonts } from '@expo-google-fonts/poppins';
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
-
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const [activeTab, setActiveTab] = useState('feed');
+  const [fontsLoaded] = useFonts({
+    Poppins_500Medium,
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
+        tabBarStyle: {
+          backgroundColor: 'rgba(8, 20, 72, 1)',
+          paddingTop: 20,
+          paddingBottom: 0,
+          borderRadius: 60,
+          marginBottom: 20,
+          height: 60,
+        },
+        tabBarActiveTintColor: '#fff',
+        tabBarInactiveTintColor: '#aaaa',
         headerShown: useClientOnlyValue(false, true),
+        tabBarLabelStyle: {
+          fontSize: 10,
+          marginTop: 15,
+          marginBottom: 10,
+          fontFamily: 'Poppins_500Medium',
+        },
+        
       }}>
       <Tabs.Screen
         name="feed"
         options={{
-          title: 'Feed',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color }) => <Iconify icon="bx:home-alt-2" color={color} size={29} />,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -50,18 +65,31 @@ export default function TabLayout() {
       <Tabs.Screen
         name="score"
         options={{
-          title: 'Descrições',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarLabel: 'Score',
+          tabBarIcon: ({ color }) => <Iconify icon="akar-icons:trophy" color={color} size={29} />,
         }}
       />
       <Tabs.Screen
         name="perfil"
         options={{
-          title: 'Perfil',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarLabel: 'Perfil',
+          tabBarIcon: ({ color }) => <Iconify icon="iconamoon:profile" color={color} size={29} />,
         }}
       />
-      
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBarIconContainer: {
+    alignItems: 'center',
+  },
+  activeTab: {
+    width: 65,
+    height: 65,
+    borderRadius: 65 / 2,
+    backgroundColor: '#FFF',
+    position: 'absolute',
+    bottom: -20, // Ajuste conforme necessário
+  },
+});
