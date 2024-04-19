@@ -19,9 +19,6 @@ import Header from '@/components/Header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PagerView from 'react-native-pager-view';
 import MyCarousel from '@/components/Carousel';
-
-
-
 export default function HomeScreen(): JSX.Element {
     const router = useRouter();
     let [fontsLoaded] = useFonts({
@@ -108,20 +105,20 @@ export default function HomeScreen(): JSX.Element {
                       marginRight: 12,
                                      
                     }}
-                    onPress={() => router.navigate('perfil')}
+                    onPress={() => router.push('/documents',)}
                     >
                       <Image source={require('../../assets/images/Textual.svg')} style={{width: 84, height: 84, marginTop: 24}}/>
                       <Text style={styles.categoryText}>
                         Textual
                       </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.smallCategory} onPress={() => router.navigate('perfil')}>
+                    <TouchableOpacity style={styles.smallCategory} onPress={() => router.navigate('documents')}>
                       <Image source={require('../../assets/images/mapa.svg')} style={{width: 36, height: 36, marginTop: 11}}/>
                       <Text style={styles.categoryTextSmall}>
                         Cartográficos
                       </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.smallCategory} onPress={() => router.navigate('perfil')}>
+                    <TouchableOpacity style={styles.smallCategory} onPress={() => router.navigate('documents')}>
                       <Image source={require('../../assets/images/icono.svg')} style={{width: 36, height: 36, marginTop: 11}}/>
                       <Text style={styles.categoryTextSmall}>
                         Iconográficos
@@ -135,13 +132,13 @@ export default function HomeScreen(): JSX.Element {
                       marginBottom: 40,
                       backgroundColor: 'transparent',
                     }}>
-                      <TouchableOpacity style={styles.smallCategoryBottom} onPress={() => router.navigate('perfil')}>
+                      <TouchableOpacity style={styles.smallCategoryBottom} onPress={() => router.navigate('documents')}>
                         <Image source={require('../../assets/images/fono.svg')} style={{width: 36, height: 36, marginTop: 11}}/>
                         <Text style={styles.categoryTextSmall}>
                           Sonoro
                         </Text>
                       </TouchableOpacity>
-                      <TouchableOpacity style={styles.smallCategoryBottom} onPress={() => router.navigate('perfil')}>
+                      <TouchableOpacity style={styles.smallCategoryBottom} onPress={() => router.navigate('documents')}>
                         <Image source={require('../../assets/images/audiovisual.svg')} style={{width: 36, height: 36, marginTop: 11}}/>
                         <Text style={styles.categoryTextSmall}>
                           Audiovisuais

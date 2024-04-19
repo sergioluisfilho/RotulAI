@@ -68,6 +68,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="score"
         options={{
+          headerShown: false,
           tabBarLabel: 'Score',
           headerShown: false,
           tabBarIcon: ({ color }) => <Iconify icon="akar-icons:trophy" color={color} size={29} />,

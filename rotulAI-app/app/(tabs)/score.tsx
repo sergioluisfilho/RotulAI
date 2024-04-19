@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Keyboard
 , Image, TouchableOpacity, ScrollView, TouchableWithoutFeedback, } from 'react-native';
 import Header from '@/components/Header';
+
 
 const App = () => {
   return (
