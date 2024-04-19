@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
 import {
@@ -11,8 +11,10 @@ import {
   useFonts
 } from '@expo-google-fonts/poppins';
 import { Image } from 'expo-image';
+import { useRouter } from 'expo-router';
 
 export default function PerfilScreen() {
+  const router = useRouter();
   let [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
@@ -106,8 +108,11 @@ export default function PerfilScreen() {
             </View>
           </View>
         </View>
-
-        
+        <TouchableOpacity style={{display:'flex', flexDirection:'row', backgroundColor: 'transparent', marginTop: 20}}>
+          <View style={styles.sair}>
+            <Text style={{fontFamily: 'Poppins_500Medium', fontSize: 16, color: '#fff'}}>Sair</Text>
+          </View>
+        </TouchableOpacity>
 
       </View>
     </View>
@@ -212,5 +217,28 @@ const styles = StyleSheet.create({
     marginRight: 18,
 
   },
+  sair: {
+    position: 'absolute',
+    alignSelf: 'center',
+    width: 90,
+    height: 37,
+    backgroundColor: '#dc1f1f',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    marginBottom: 27,
+    paddingLeft: 13,
+    paddingRight: 13,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 4,
+      height: 8,
+  },
+  shadowOpacity: 0.2,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginLeft: 250,
+    marginRight: 20,
 
+  },
 });
