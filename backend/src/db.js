@@ -6,7 +6,7 @@ const pool = new Pool({
   user: "postgres",
   host: "viaduct.proxy.rlwy.net",
   database: "rotulai",
-  password: "KSAbYHUlbnYrXLZQtVmSRtIpKYVbXfGd",
+  password: "",
   port: 50820,
 });
 

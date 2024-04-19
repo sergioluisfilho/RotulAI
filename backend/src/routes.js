@@ -56,12 +56,28 @@ routes.post(
   }
 );
 
-routes.get("/profile", async (req, res) => {
-  res.send();
+routes.get("/profile/", authorize, async (req, res) => {
+  try {
+    const { user_id } = req.user;
+    const { rows } = await pool.query(
+      "SELECT id, name, points, email FROM public.users where id = $1",
+      [user_id]
+    );
+    res.json({ user: rows[0] });
+  } catch (error) {
+    console.log(error);
+    res.status(404);
+  }
 });
 
 routes.get("/rewards", async (req, res) => {
-  res.send();
+  try {
+    const { rows } = await pool.query("SELECT * FROM public.rewards", []);
+    res.json({ rewards: rows });
+  } catch (error) {
+    console.log(error);
+    res.status(404);
+  }
 });
 
 export default routes;
