@@ -69,6 +69,7 @@ export default function TabLayout() {
         name="score"
         options={{
           tabBarLabel: 'Score',
+          headerShown: false,
           tabBarIcon: ({ color }) => <Iconify icon="akar-icons:trophy" color={color} size={29} />,
         }}
       />
@@ -76,6 +77,7 @@ export default function TabLayout() {
         name="perfil"
         options={{
           tabBarLabel: 'Perfil',
+          headerShown: false,
           tabBarIcon: ({ color }) => <Iconify icon="iconamoon:profile" color={color} size={29} />,
         }}
       />
