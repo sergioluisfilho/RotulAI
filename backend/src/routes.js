@@ -96,9 +96,7 @@ routes.post(
         console.log(error);
         res.status(404);
       }
-    }
-    // nao testei
-    else if (vote === 0) {
+    } else if (vote === 0) {
       // Caso negue:
       // Muda o status para 0
       const documents = await pool.query(
