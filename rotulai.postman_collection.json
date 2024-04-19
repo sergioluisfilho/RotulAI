@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "60eb1ec5-eada-4e2e-97cf-db9ea629bc19",
+		"name": "rotulai",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22572026"
+	},
+	"item": [
+		{
+			"name": "List all documents (Feed)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/documents",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"documents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add document description",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"teste3\",\n    \"date\": \"2022-12-11\",\n    \"content\": \"LOREM IPSUM\",\n    \"indexes\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/documents/:document_id/description",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"documents",
+						":document_id",
+						"description"
+					],
+					"variable": [
+						{
+							"key": "document_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista dados do usuário",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/profile",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recompensas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/rewards",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List document info by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/documents/:id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"documents",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add review to one description",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"vote\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/documents/:document_id/description/:description_id/review",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"documents",
+						":document_id",
+						"description",
+						":description_id",
+						"review"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "document_id",
+							"value": "1"
+						},
+						{
+							"key": "description_id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"leo@gmail.com\",\n    \"password\": \"123mudar\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
