@@ -4,7 +4,7 @@ import { Platform, StyleSheet, SafeAreaView, TouchableOpacity, Linking, Image, B
 import { useRoute } from '@react-navigation/native';
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
-import { WebView } from 'react-native-webview';
+import { useRouter } from 'expo-router';
 
 const webViewStyle = `
 body {
@@ -18,7 +18,7 @@ img {
 `;
 
 export default function DocumentsScreen() {
-    const route = useRoute();
+  const router = useRouter();
     const openFile = (fileUrl: string) => {
       Linking.openURL(fileUrl);
     };
@@ -39,7 +39,7 @@ export default function DocumentsScreen() {
                 <Text >{document.fileName}</Text>
                 </View>
                 <Text >{document.reward_points} pontos</Text>
-                <Button title="Descrever" onPress={()=>{}}></Button>
+                <Button title="Descrever" onPress={()=>{router.navigate('/descrever')}}></Button>
               </TouchableOpacity>
 
               </View>
