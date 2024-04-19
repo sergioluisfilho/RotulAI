@@ -29,6 +29,8 @@ export default function TabLayout() {
           borderRadius: 60,
           marginBottom: 20,
           height: 60,
+          width: '95%',
+          alignSelf: 'center',
         },
         tabBarActiveTintColor: '#fff',
         tabBarInactiveTintColor: '#aaaa',
