@@ -8,7 +8,7 @@ interface NovaPaginaProps {
   navigation: any; // Corrija o tipo de acordo com a tipagem de navigation
 }
 
-const Perfil: React.FC<NovaPaginaProps> = ({ navigation }) => {
+const Descrever: React.FC<NovaPaginaProps> = ({ navigation }) => {
   const { control, handleSubmit, formState } = useForm();
 
   const onSubmit = (data: any) => {
@@ -223,4 +223,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Perfil;
+export default Descrever;

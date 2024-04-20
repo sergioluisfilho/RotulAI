@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {documents} from '../mock/documents.js';
+import { documents } from '../mock/documents.js';
 import { Platform, StyleSheet, SafeAreaView, TouchableOpacity, Linking, Image, Button } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import EditScreenInfo from '@/components/EditScreenInfo';
@@ -19,34 +19,66 @@ img {
 
 export default function DocumentsScreen() {
   const router = useRouter();
-    const openFile = (fileUrl: string) => {
-      Linking.openURL(fileUrl);
-    };
-  
-    return (
-      <SafeAreaView style={styles.safeAreaView}>
-    <View style={styles.container}>
-      <View style={styles.topBar}>
-      <Image source={require('../assets/images/arrow.png')} />
-      <Text style={styles.title}>Documentos</Text>
-      </View>
-      <View>
-      <View style={styles.documentsFeed}>
-      {documents.map((document, index) => (
-              <View key={index} style={styles.filebox}>
-              <TouchableOpacity onPress={()=>{openFile(document.url)}}>
-                <View>
-                <Text >{document.fileName}</Text>
-                </View>
-                <Text >{document.reward_points} pontos</Text>
-                <Button title="Descrever" onPress={()=>{router.navigate('/descrever')}}></Button>
-              </TouchableOpacity>
+  const [selectedTab, setSelectedTab] = useState('description'); // Estado para controlar a tab selecionada
 
-              </View>
-            ))}
+  const openFile = (fileUrl: string) => {
+    Linking.openURL(fileUrl);
+  };
+
+  return (
+    <SafeAreaView style={styles.safeAreaView}>
+      <View style={styles.container}>
+        <View style={styles.topBar}>
+          <Image source={require('../assets/images/arrow.png')} />
+          <Text style={styles.title}>Documentos</Text>
+        </View>
+        <View>
+          {/* Tabs */}
+          <View style={styles.tabs}>
+            <TouchableOpacity
+              style={[styles.tab, selectedTab === 'description' && styles.selectedTab]}
+              onPress={() => setSelectedTab('description')}>
+              <Text style={styles.tabText}>Descrição</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.tab, selectedTab === 'review' && styles.selectedTab]}
+              onPress={() => setSelectedTab('review')}>
+              <Text style={styles.tabText}>Avaliação</Text>
+            </TouchableOpacity>
+          </View>
+          {/* Conteúdo das tabs */}
+          <View style={styles.documentsFeed}>
+            {selectedTab === 'description' && (
+              // Conteúdo para a tab "Descrição"
+              documents.map((document, index) => (
+                <View key={index} style={styles.filebox}>
+                  <TouchableOpacity onPress={() => { openFile(document.url) }}>
+                    <View>
+                      <Text>{document.fileName}</Text>
+                    </View>
+                    <Text>{document.reward_points} pontos</Text>
+                    <Button title="Descrever" onPress={() => { router.navigate('/descrever') }}></Button>
+                  </TouchableOpacity>
+                </View>
+              ))
+            )}
+            {selectedTab === 'review' && (
+              // Conteúdo para a tab "Avaliação"
+              documents.map((document, index) => (
+                <View key={index} style={styles.filebox}>
+                  <TouchableOpacity onPress={() => { openFile(document.url) }}>
+                    <View>
+                      <Text>{document.fileName}</Text>
+                    </View>
+                    <Text>{document.reward_points} pontos</Text>
+                    <Button title="Avaliar" onPress={() => { router.navigate('/avaliar') }}></Button>
+                  </TouchableOpacity>
+                </View>
+              ))
+            )}
+          </View>
+        </View>
       </View>
-    </View>
-    </View>
     </SafeAreaView>
   );
 }
@@ -57,7 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#212B4E',
     marginTop: 10,
   },
-  safeAreaView: {  
+  safeAreaView: {
     flex: 1,
     backgroundColor: '#212B4E',
   },
@@ -83,5 +115,22 @@ const styles = StyleSheet.create({
   },
   documentsFeed: {
 
+  },
+  tabs: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 10,
+  },
+  tab: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  selectedTab: {
+    borderBottomWidth: 2,
+    borderBottomColor: 'white',
+  },
+  tabText: {
+    color: 'white',
+    fontSize: 16,
   },
 });

@@ -8,7 +8,7 @@ export default function MyCarousel() {
       <PagerView style={styles.container} initialPage={0}>
         <View style={styles.page} key="1">
           <Image
-            style={{ width: 400, height: 151 }}
+            style={{ width: '100%', height: '100%', borderRadius: 20, resizeMode: 'cover', overflow: 'hidden'}}
             source={require('../assets/images/FotoCarrossel.png')}
           />
         </View>
